@@ -1,0 +1,63 @@
+seed: 321
+num_classes: 2
+class_names: [corneal_nerve, langerhans_cell]
+image_channels: 1
+image_size: [384, 384]
+
+model:
+  # Expert-selected defaults for details not specified in the paper.
+  widths: [64, 128, 256, 512, 1024]
+  attention_dim: 128
+  attention_heads: 8
+  deformable_points: 4
+  deformable_offset_scale: 0.25
+  external_memory_tokens: 64
+
+fia:
+  lambda_distance: 3.0
+  corruption_probability: 0.5
+  dilation_radius: [1, 5]
+  forgery_fraction: [0.02, 0.10]
+  truncation_fraction: [0.10, 0.35]
+  rotation_degrees: 20
+  translation_fraction: 0.10
+
+prototype:
+  foreground_prototypes: 3
+  sgc_iterations: 10
+  spatial_weight_denominator: 100.0
+  pool_capacity: 256
+  query_count: 64
+  negative_key_count: 128
+  query_threshold_delta: 0.6
+  negative_rank_low: 3.0
+  negative_rank_high: 9.0
+  temperature: 0.1
+
+training:
+  teacher_epochs: 100
+  early_epochs: 100
+  total_epochs: 1000
+  batch_size: 2
+  labeled_batch_size: 1
+  unlabeled_batch_size: 1
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_eps: 0.00000001
+  alpha_rkd: 0.3
+  beta_pcl: 0.2
+  confidence_floor: 0.7
+  confidence_reduction: foreground_mean
+  num_workers: 4
+
+augmentation:
+  probability: 0.5
+  horizontal_flip: true
+  vertical_flip: true
+  rotate_limit: 90
+  gaussian_noise: true
+  gaussian_blur: true
+  color_jitter: true
+  random_brightness_contrast: true

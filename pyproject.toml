@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "semi-nc"
+version = "0.1.0"
+description = "Reproduction of Semi-NC prototype-driven semi-supervised segmentation"
+readme = "README.md"
+requires-python = "==3.9.*"
+dependencies = [
+  "torch==1.13.1",
+  "numpy==1.23.5",
+  "scipy==1.9.3",
+  "Pillow==9.5.0",
+  "PyYAML==6.0.1",
+  "albumentations==1.3.1",
+  "opencv-python-headless==4.7.0.72",
+]
+
+[project.optional-dependencies]
+test = ["pytest==7.4.4"]
+
+[tool.setuptools.packages.find]
+include = ["semi_nc*", "third_party*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
